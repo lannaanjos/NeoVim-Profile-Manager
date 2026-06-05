@@ -1,4 +1,4 @@
--- bootstrap
+-- bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -15,13 +15,28 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- /\/\/\ CONFIGURAÇÃO DO LAZY VIM
--- import = plugins -> varre todos os diretórios do runtimepath carregando auto o core geral e o profile
+-- /\/\/\/\ carregamento direto dos specs do core por caminho absoluto
+local core_plugins_dir = vim.fn.fnamemodify(debug.getinfo(1, "S").source:sub(2), ":h:h") .. "/core_plugins"
+
+local function load_core_specs()
+  local specs = {}
+  for _, f in ipairs(vim.fn.glob(core_plugins_dir .. "/*.lua", false, true)) do
+    local ok, result = pcall(dofile, f)
+    if ok and type(result) == "table" then
+      table.insert(specs, result)
+    end
+  end
+  return specs
+end
+
+-- /\/\/\/\ configuracao do lazy.nvim
+local core_specs = load_core_specs()
+
 require("lazy").setup({
-  spec = {
-    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-    { import = "plugins" },
-  },
+  spec = vim.list_extend(
+    { { "LazyVim/LazyVim", import = "lazyvim.plugins" } },
+    vim.list_extend(core_specs, { { import = "plugins" } })
+  ),
   defaults = {
     lazy = false,
     version = false,
