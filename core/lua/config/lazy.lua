@@ -58,3 +58,5 @@ require("lazy").setup({
     },
   },
 })
+
+dofile(vim.fn.fnamemodify(core_plugins_dir, ":h") .. "/profile-switcher.lua")
