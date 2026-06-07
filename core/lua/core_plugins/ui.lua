@@ -4,6 +4,13 @@ return {
     "folke/snacks.nvim",
     opts = {
       explorer = { enabled = false },
+      styles = {
+        terminal = {
+          -- wo = {
+          -- winhighlight = "Normal:NormalFloat",
+          -- },
+        },
+      },
     },
   },
 }
