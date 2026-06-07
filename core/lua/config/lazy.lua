@@ -59,4 +59,7 @@ require("lazy").setup({
   },
 })
 
+dofile(vim.fn.fnamemodify(core_plugins_dir, ":h") .. "/config/options.lua")
+dofile(vim.fn.fnamemodify(core_plugins_dir, ":h") .. "/config/keymaps.lua")
+dofile(vim.fn.fnamemodify(core_plugins_dir, ":h") .. "/config/autocmds.lua")
 dofile(vim.fn.fnamemodify(core_plugins_dir, ":h") .. "/profile-switcher.lua")
