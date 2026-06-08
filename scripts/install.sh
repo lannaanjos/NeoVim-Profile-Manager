@@ -6,12 +6,8 @@ CONFIG_DIR="$HOME/.config"
 
 # profiles
 declare -A PROFILES=(
-	[Apostate]="nvim-apostate"
-	[Corporate]="nvim-corporate"
-	[Industrial]="nvim-industrial"
-	[Playground]="nvim-playground"
-	[Scribe]="nvim-scribe"
-	[Wired]="nvim-wired"
+	[Default]="nvim-default"
+	[Misc]="nvim-misc"
 )
 
 # criando symlinks
