@@ -1,4 +1,4 @@
--- bootstrap lazy.nvim
+-- /\/\/\/\ lazy.nvim bootstrap
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -15,9 +15,11 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- /\/\/\/\ carregamento direto dos specs do core por caminho absoluto
-local core_plugins_dir = vim.fn.fnamemodify(debug.getinfo(1, "S").source:sub(2), ":h:h") .. "/core_plugins"
+-- /\/\/\/\ core paths
+local lua_dir = vim.fn.fnamemodify(debug.getinfo(1, "S").source:sub(2), ":h:h")
+local core_plugins_dir = lua_dir .. "/core_plugins"
 
+-- /\/\/\/\ load core plugin specs via absolute path
 local function load_core_specs()
   local specs = {}
   for _, f in ipairs(vim.fn.glob(core_plugins_dir .. "/*.lua", false, true)) do
@@ -29,13 +31,11 @@ local function load_core_specs()
   return specs
 end
 
--- /\/\/\/\ configuracao do lazy.nvim
-local core_specs = load_core_specs()
-
+-- /\/\/\/\ lazy.nvim setup
 require("lazy").setup({
   spec = vim.list_extend(
     { { "LazyVim/LazyVim", import = "lazyvim.plugins" } },
-    vim.list_extend(core_specs, { { import = "plugins" } })
+    vim.list_extend(load_core_specs(), { { import = "plugins" } })
   ),
   defaults = {
     lazy = false,
@@ -59,7 +59,9 @@ require("lazy").setup({
   },
 })
 
-dofile(vim.fn.fnamemodify(core_plugins_dir, ":h") .. "/config/options.lua")
-dofile(vim.fn.fnamemodify(core_plugins_dir, ":h") .. "/config/keymaps.lua")
-dofile(vim.fn.fnamemodify(core_plugins_dir, ":h") .. "/config/autocmds.lua")
-dofile(vim.fn.fnamemodify(core_plugins_dir, ":h") .. "/profile-switcher.lua")
+-- /\/\/\/\ load shared core config
+dofile(lua_dir .. "/config/options.lua")
+dofile(lua_dir .. "/config/keymaps.lua")
+dofile(lua_dir .. "/config/autocmds.lua")
+dofile(lua_dir .. "/profile-switcher/init.lua")
+
