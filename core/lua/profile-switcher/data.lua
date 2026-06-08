@@ -16,6 +16,8 @@ M.profiles = {
   { name = "Playground", appname = "nvim-playground" },
   { name = "Scribe", appname = "nvim-scribe" },
   { name = "Wired", appname = "nvim-wired" },
+  { name = "Default", appname = "nvim-default" },
+  { name = "Misc", appname = "nvim-misc" },
   -- [PROFILES_END]
 }
 
