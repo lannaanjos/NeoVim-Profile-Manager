@@ -13,5 +13,5 @@ vim.keymap.set("i", "<C-z>", "<Esc>u", { desc = "Undo Insert" })
 vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Open and close neo-tree" })
 
 -- text navigation
-vim.keymap.set("n", "<C-t>", "ggVG", { desc = "Select all Normal" })
-vim.keymap.set("i", "<C-t>", "<Esc>ggVG", { desc = "Select all Insert" })
+vim.keymap.set("n", "<C-a>", "ggVG", { desc = "Select all Normal" })
+vim.keymap.set("i", "<C-a>", "<Esc>ggVG", { desc = "Select all Insert" })
