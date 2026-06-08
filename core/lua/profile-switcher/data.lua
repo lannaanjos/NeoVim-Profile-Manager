@@ -4,8 +4,6 @@ local M = {}
 
 M.profile_file = vim.fn.expand("~/.config/nvim-active-profile")
 
-M.repo_root = vim.fn.fnamemodify(M.switcher_path, ":h:h:h:h")
-
 M.repo_root = vim.fn.fnamemodify(M.switcher_path, ":h:h:h")
 
 M.profiles = {
